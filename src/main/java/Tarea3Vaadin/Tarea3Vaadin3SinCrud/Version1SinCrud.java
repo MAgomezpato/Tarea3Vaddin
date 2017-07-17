@@ -10,18 +10,20 @@ import com.vaadin.ui.*;
 
 
 @Theme("mytheme")
-public class Principal extends UI {
+public class Version1SinCrud extends UI {
 
-    
+
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
+
 
         HorizontalLayout hlayout = new HorizontalLayout();
         HorizontalLayout hlayout2 = new HorizontalLayout();
         HorizontalLayout hlayout3 = new HorizontalLayout();
         VerticalLayout vlayout = new VerticalLayout();
 
+        Label Titulo=new Label("Sistema de Gestion de Panaderias y Equipos para Panaderias");
         TextField codigo=new TextField("Codigo:");
         TextField panaderia=new TextField("Panaderia:");
         TextField pedido=new TextField("Pedido:");
@@ -31,15 +33,16 @@ public class Principal extends UI {
         Button eliminar=new Button("Eliminar");
         Button salir=new Button("Salir");
 
-        Grid<Principal> tabla=new Grid<>();
-        tabla.addColumn(Principal::getCaption).setCaption("Codigo");
-        tabla.addColumn(Principal::getCaption).setCaption("Panaderia");
-        tabla.addColumn(Principal::getCaption).setCaption("Agregar");
-        tabla.addColumn(Principal::getCaption).setCaption("Equipo");
+        Grid<Version1SinCrud> tabla=new Grid<>();
+        tabla.addColumn(Version1SinCrud::getCaption).setCaption("Codigo");
+        tabla.addColumn(Version1SinCrud::getCaption).setCaption("Panaderia");
+        tabla.addColumn(Version1SinCrud::getCaption).setCaption("Agregar");
+        tabla.addColumn(Version1SinCrud::getCaption).setCaption("Equipo");
 
         hlayout.addComponents(codigo,panaderia);
         hlayout2.addComponents(pedido, equipo);
         hlayout3.addComponents(agregar, nuevo, eliminar, salir);
+        vlayout.addComponent(Titulo);
         vlayout.addComponent(hlayout);
         vlayout.addComponent(hlayout2);
         vlayout.addComponent(hlayout3);
@@ -51,7 +54,17 @@ public class Principal extends UI {
 
 
         agregar.addClickListener( e -> {
-            tabla.SetItems
+
+
+
+
+
+            tabla.setItems(getCaption(codigo));
+            tabla.setItems(getCaption(panaderia));
+            tabla.setItems(getCaption(pedido));
+            tabla.setItems(getCaption(equipo));
+
+
         });
 
         /*TextField codigo = new TextField();
@@ -74,8 +87,12 @@ public class Principal extends UI {
 
     }
 
+    private Version1SinCrud getCaption(TextField codigo) {
+        return null;
+    }
+
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = Principal.class, productionMode = false)
+    @VaadinServletConfiguration(ui = Version1SinCrud.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
     }
 }
